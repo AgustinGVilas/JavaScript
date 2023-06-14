@@ -17,8 +17,13 @@ nav{
     padding: 1rem;
 }
 
+
+.navItem{
+    color: aqua;
+}
+
 .navItem:hover{
-    color:white
+    color:white;
 }
 
 header{
@@ -45,4 +50,10 @@ header{
 
 .imagen{
     width: 100px;
+}
+
+#container2{
+    margin: 1rem;
+    border: 2px solid;
+    background-color: beige;
 }

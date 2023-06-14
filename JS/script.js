@@ -5,16 +5,9 @@ let productos = [
 ]
 
 let main = document.getElementById("container")
-let carrito = []  // hacer un push para agregar
+let newDiv = document.getElementById("container2")
+let carrito = []
 let precioTotal = 0
-
-class Productos{
-    constructor(id, nombre, precio){
-        this.id = id
-        this.nombre = nombre
-        this.precio = precio
-    }
-}
 
 
 function renderizarProductos() {
@@ -35,8 +28,13 @@ function renderizarProductos() {
 function agregarAlCarrito(productoID){
     const prodSeleccionado = productos.find(producto => producto.id === productoID)
     carrito.push(prodSeleccionado)
+    localStorage.setItem("carrito", JSON.stringify(carrito))
     precioTotal = carrito.reduce((total, producto) => total + producto.precio, 0)
-    alert("Agregaste el producto al carrito")
+    divCard = ""
+    for (let index = 0; index < carrito.length; index++) {
+        divCard += `<h1>${carrito[index].nombre}</h1>`
+    }
+    newDiv.innerHTML = "<h1>El carrito contiene: </h1>" + divCard + `<h1>El precio total del carrito es: $${precioTotal}</h1>`
 }
 
 function eliminarDeCarrito(productoID){
@@ -44,14 +42,15 @@ function eliminarDeCarrito(productoID){
     if (index !== -1){
         carrito.splice(index, 1)
         precioTotal = carrito.reduce((total, producto) => total + producto.precio, 0)
-        alert("Eliminaste el producto del carrito")
     }
+    localStorage.setItem("carrito", JSON.stringify(carrito))
+    divCard = ""
+    for (let index = 0; index < carrito.length; index++) {
+        divCard += `<h1>${carrito[index].nombre}</h1>`
+    }
+    newDiv.innerHTML = "<h1>El carrito contiene: </h1>" + divCard + `<h1>El precio total del carrito es: $${precioTotal}</h1>`
     
 }
 
-function leerCarrito(){
-    const productosCarrito = carrito.map(productos => productos.nombre)
-    alert("El carrito contiene: \n" + productosCarrito.join("\n") + "\nEl precio total es: $" + precioTotal)
-}
-
 renderizarProductos()
+
